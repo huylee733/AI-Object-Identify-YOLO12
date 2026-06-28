@@ -2,3 +2,8 @@ ultralytics
 opencv-python
 touch
 matplolib
+YAML
+os
+glob
+IPython.display
+google.colab

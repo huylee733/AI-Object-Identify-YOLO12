@@ -1,9 +1,12 @@
 ultralytics
 opencv-python
 touch
-matplolib
+touchvision
+matplotlib
 YAML
 os
 glob
 IPython.display
 google.colab
+pandas
+numpy

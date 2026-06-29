@@ -28,11 +28,33 @@ Dự án sử dụng YOLOv11 với những cải tiến mang tính cách mạng 
 * **Kỹ thuật áp dụng:** Sử dụng các kỹ thuật tăng cường dữ liệu như Mosaic và Mixup để làm phong phú dữ liệu, giúp mô hình tổng quát hóa tốt hơn.
 * **Kết quả đầu ra:** Tệp trọng số tối ưu nhất được lưu trữ tại `my_model.pt`.
 
-## 4. Kết quả Thực nghiệm
-* **Độ chính xác (mAP):** YOLOv11 đạt chỉ số mAP vượt trội (ví dụ bản YOLOv11n đạt 39.5 mAP trên tập COCO, cao hơn YOLOv8n).
-* **Chỉ số mAP@50-95 cao:** Chứng tỏ mô hình không chỉ phát hiện đúng lớp vật thể mà còn định vị hộp bao cực kỳ khít và chính xác với đối tượng thực tế.
-* **Hoạt động suy luận (Inference):** Ứng dụng thành công vào bài toán nhận diện thời gian thực qua webcam, tận dụng tối đa khả năng tối ưu hóa của thư viện Ultralytics để trả về tọa độ và xác suất lớp nhanh chóng.
+## 4. Kết quả thực nghiệm
 
+Sau 60 chu kỳ huấn luyện (epochs), mô hình thu được (`my_model.pt`) đạt các chỉ số đánh giá hiệu suất trực quan cực kỳ tối ưu trên tập dữ liệu kiểm thử. Các chỉ số được thống kê chi tiết trong bảng dưới đây:
+
+| Chỉ số hiệu suất | Giá trị đạt được | Ý nghĩa trong bài toán thực tế |
+| :--- | :---: | :--- |
+| **mAP@50** | **82.9%** | Độ chính xác tổng thể trong việc nhận diện đúng loại vật thể và định vị vùng chứa (IoU > 50%). |
+| **Precision** (Độ chính xác) | **78.7%** | Tỷ lệ dự đoán đúng trên tổng số đối tượng được phát hiện (Hạn chế tối đa báo động giả/nhầm nền). |
+| **Recall** (Độ nhạy) | **83.3%** | Khả năng quét và tìm thấy đối tượng, tránh bỏ sót các vật thể thực tế xuất hiện trong khung hình. |
+| **mAP@50-95** | **59.8%** | Điểm số đánh giá độ khít và chuẩn xác nghiêm ngặt của hộp bao quanh vật thể khi tịnh tiến IoU từ 50% đến 95%. |
+| **Inference Speed** (Tốc độ) | **~7.5 ms / ảnh** | Tốc độ xử lý siêu nhanh, tương đương **>130 FPS**, đáp ứng hoàn hảo yêu cầu thời gian thực không độ trễ. |
+
+
+### Đánh giá chung:
+Mô hình đạt độ nhạy (**Recall: 83.3%**) cao hơn so với **Precision**, giúp hệ thống hoạt động ổn định trong điều kiện thực tế, ưu tiên việc phát hiện tối đa vật thể để không bỏ sót mục tiêu. Tốc độ suy luận **7.5 ms** chứng minh cấu trúc cải tiến của YOLOv11 tối ưu phần cứng cực tốt.
+
+## Bảng So Sánh Hiệu Suất Các Phiên Bản YOLO11
+
+Dưới đây là bảng thống kê hiệu năng chuẩn, so sánh các biến thể của mạng YOLO11 được đánh giá mức độ hội tụ (kích thước ảnh đầu vào định tuyến ở 640x640):
+
+| Mô hình | Kích thước ảnh | mAP<sup>val</sup> 50-95 | Tốc độ CPU ONNX (ms) | Tốc độ T4 TensorRT10 (ms) | Tham số (M) | FLOPs (B) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **YOLO11n** | 640 | 39.5 | 56.1 ± 0.8 | 1.5 ± 0.0 | 2.6 | 6.5 |
+| **YOLO11s** | 640 | 47.0 | 90.0 ± 1.2 | 2.5 ± 0.0 | 9.4 | 21.5 |
+| **YOLO11m** | 640 | 51.5 | 183.2 ± 2.0 | 4.7 ± 0.1 | 20.1 | 68.0 |
+| **YOLO11l** | 640 | 53.4 | 238.6 ± 1.4 | 6.2 ± 0.1 | 25.3 | 86.9 |
+| **YOLO11x** | 640 | 54.7 | 462.8 ± 6.7 | 11.3 ± 0.2 | 56.9 | 194.9 |
 ## 5. Hướng dẫn chạy mô hình thời gian thực (Inference)
 Dưới đây là đoạn mã nguồn cơ bản để khởi chạy mô hình nhận diện qua camera:
 
@@ -85,7 +107,7 @@ Nếu bạn sử dụng repository này, vui lòng trích dẫn:
   author       = {Huynh Hai Nam and Le Nguyen Nhat Huy and Do Quoc Hoan},
   year         = {2025},
   howpublished = {GitHub repository},
-  url          = {https://github.com/duy1sme/NCKH-3D-Face-Recognition}
+  url          = {https://github.com/huylee733/AI-Object-Identify-YOLO12.git}
 }
 ```
 

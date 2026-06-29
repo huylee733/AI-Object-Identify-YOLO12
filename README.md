@@ -68,6 +68,14 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
+## Cấu trúc thư mục
+```text
+BTL_AI_Object_Identify_YOLO/
+  mo_hinh/
+  slide/
+  requirements.txt
+```
+
 ## Trích dẫn
 Nếu bạn sử dụng repository này, vui lòng trích dẫn:
 
@@ -75,7 +83,7 @@ Nếu bạn sử dụng repository này, vui lòng trích dẫn:
 @misc{btlyolo,
   title        = {BTL: xác định vật thể bằng mô hình YOLO},
   author       = {Huynh Hai Nam and Le Nguyen Nhat Huy and Do Quoc Hoan},
-  year         = {2026},
+  year         = {2025},
   howpublished = {GitHub repository},
   url          = {https://github.com/duy1sme/NCKH-3D-Face-Recognition}
 }

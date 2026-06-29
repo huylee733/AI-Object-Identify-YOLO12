@@ -93,8 +93,7 @@ cv2.destroyAllWindows()
 ## Cấu trúc thư mục
 ```text
 BTL_AI_Object_Identify_YOLO/
-  mo_hinh/
-  slide/
+  model2/
   requirements.txt
 ```
 
